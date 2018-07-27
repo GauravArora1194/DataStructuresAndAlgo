@@ -441,6 +441,10 @@ public class BinaryTree {
 		// Instead of using treemap (for sorting the elements) we can use a hashmap and use two 
 		// variables min and max where, min is the least value of hd and max is the max value of hd.
 		// then we can traverse the map from min to max linearly.
+		
+		// A TreeMap must be provided by either Comparator interface externally or must have a type
+		// that implements comparable interface. Here since Integer class implements comparable interface
+		// we have not provided external interface.
 		Map<Integer, Integer> map = new TreeMap<>();
 		
 		Node temp = node;
@@ -524,7 +528,32 @@ public class BinaryTree {
 		return root;
 	}
 	
+	
+	// checks if the binary tree is height balanced or not
+	
+	public boolean checkIfHeightBalanced(Node root) {
 		
+		int leftHeight;
+		int rightHeight;
+		
+		if(root == null)
+			return true;
+		
+		leftHeight = treeMaxHeight(root.left);
+		rightHeight = treeMaxHeight(root.right);
+		
+		
+		if(Math.abs(leftHeight - rightHeight) <= 1
+				&& checkIfHeightBalanced(root.left)
+				&& checkIfHeightBalanced(root.right)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+
+	
 	public static void main(String[] args) {
 		
 		BinaryTree tree = new BinaryTree();
