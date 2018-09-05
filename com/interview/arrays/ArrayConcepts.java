@@ -27,7 +27,7 @@ public class ArrayConcepts {
 
 		// An Object copy is usually called a clone.
 		// A shallow copy of an object copies the main object but doesn't copy the inner
-		// object.Inner objects are shared
+		// object.The ‘inner objects’ are shared between the original object and its copy.
 		// A deep copy of an object copies inner object as well i.e a new independent
 		// object is created.
 
