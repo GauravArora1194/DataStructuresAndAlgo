@@ -1,4 +1,4 @@
-package com.interview.arrays.advanced;
+package com.interview.matrix;
 
 public class RotateMatrixby90 {
 	

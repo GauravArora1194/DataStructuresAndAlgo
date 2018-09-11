@@ -2,7 +2,6 @@ package com.interview.multithreadingAndconcurrency;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class ExecutorExample {
 
@@ -13,7 +12,7 @@ public class ExecutorExample {
 		Task t2 = new Task();
 		Task t3 = new Task();
 		
-		ExecutorService executor1 = Executors.newFixedThreadPool(2);
+		//ExecutorService executor = Executors.newFixedThreadPool(2);
 		// ExecutorService executor = Executors.newCachedThreadPool();
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		
