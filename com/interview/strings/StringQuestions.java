@@ -1,4 +1,4 @@
-package com.interview.questions;
+package com.interview.strings;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -48,6 +48,32 @@ public class StringQuestions {
 		}
 		
 		return chars[0];
+	}
+	
+	
+	public static char getFirstNonRepeatingChar1(String str) {
+		
+		char[] chars = str.toCharArray();
+		
+		char firstNonRepeat = chars[0];
+		
+		int[] charsArr = new int[256];
+		
+		for(int i = 0; i < chars.length; i++ ) {
+			
+			charsArr[chars[i]]++;
+		}
+		
+		
+		for(int i = 0; i < chars.length; i++ ) {
+			
+			if(charsArr[chars[i]] == 1) {
+				firstNonRepeat = chars[i];
+				break;
+			}
+		}
+		
+		return firstNonRepeat;
 	}
 	
 	
@@ -112,6 +138,9 @@ public class StringQuestions {
 		char maxOccurChar = getMaxOccuringChar(str);
 		System.out.println("Max char occurance : " + maxOccurChar);
 		System.out.println("First Non repeating char : " + getFirstNonRepeatingChar("geeksforeeks"));
+		System.out.println("First Non repeating char : " + getFirstNonRepeatingChar1("geeksforeeks"));
+		System.out.println("First Non repeating char : " + getFirstNonRepeatingChar("zxvczbtxyzvy"));
+		System.out.println("First Non repeating char : " + getFirstNonRepeatingChar1("zxvczbtxyzvy"));
 	}
 	
 	
