@@ -18,6 +18,6 @@ public class TowerOfHanoi {
 	
 	public static void main(String[] args) {
 		
-		printTowerOfHanoi(2, 'A', 'B', 'C');
+		printTowerOfHanoi(3, 'A', 'B', 'C');
 	}
 }

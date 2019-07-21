@@ -58,7 +58,7 @@ public class BinarySearchInSortedAndRotatedArray {
 		if(data >= temp1[0]) {
 			//search in first array
 			
-			for(int i = 0; i< temp1.length; i++) {
+			for(int i = 0; i < temp1.length; i++) {
 				if(data == temp1[i]) {
 					return i;
 				}

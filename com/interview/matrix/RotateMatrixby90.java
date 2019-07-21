@@ -1,81 +1,82 @@
 package com.interview.matrix;
 
 public class RotateMatrixby90 {
-	
-	
-	// It can be solved using 2 steps - 
+
+	// It can be solved using 2 steps -
 	// 1. find the transpose of the matrix
 	// 2. reverse column/rows of the transpose.
 
-	
-	public static int[][] rotatematrix(int[][] matrix){
-		
-		int rowLength = matrix.length;
-		int colLength = matrix[0].length;
-		
+	public static int[][] rotatematrix(int[][] matrix) {
+
 		// first find the transpose of matrix
-		for(int i = 0; i < rowLength; i++) {
-			
-			for(int j = i; j < colLength; j++) {
-				
-				int temp = matrix[i][j];
-				matrix[i][j] = matrix[j][i];
-				matrix[j][i] = temp;
-				
+		transpose(matrix);
+
+		// After the transpose we reverse the array
+		reverse(matrix);
+
+		return matrix;
+
+	}
+
+	private static void reverse(int[][] matrix) {
+
+		int left = 0;
+		int right = matrix[0].length - 1;
+
+		while (left < right) {
+
+			for (int row = 0; row < matrix.length; row++) {
+
+				swap(matrix, left, right, row);
+			}
+
+			left++;
+			right--;
+		}
+	}
+
+	private static void swap(int[][] matrix, int left, int right, int row) {
+		
+		int temp = matrix[row][left];
+		matrix[row][left] = matrix[row][right];
+		matrix[row][right] = temp;
+	}
+
+	private static void transpose(int[][] matrix) {
+
+		int rowLength = matrix.length;
+
+		for (int row = 0; row < rowLength; row++) {
+
+			for (int col = row; col < matrix[row].length; col++) {
+
+				swap(matrix, row, col);
+
 			}
 		}
-		
-		
-		// After transpose we swap elements of
-	    // column one by one for finding left
-	    // rotation of matrix by 90 degree
-		for (int i = 0; i < matrix[0].length; i++)
-            for (int j = 0,  k = matrix[0].length - 1;
-                             j < k; j++, k--)
-            {  
-                int temp = matrix[j][i];
-                matrix[j][i] = matrix[k][i];
-                matrix[k][i] = temp;
-            }
-		
-		
-		// We can also do this-
-		
-		/*for(int i = 0, k = rowLength -1; i < k ; i++, k-- ) {
-			
-			for(int j = 0; j < colLength ;j++) {
-				
-				int temp = matrix[i][j];
-				matrix[i][j] = matrix[k][j];
-				matrix[k][j] = temp;
-			}
-		}*/
-		
-		return matrix;
-		
 	}
-	
-	
+
+	private static void swap(int[][] matrix, int row, int col) {
+
+		int temp = matrix[row][col];
+		matrix[row][col] = matrix[col][row];
+		matrix[col][row] = temp;
+	}
+
 	public static void main(String[] args) {
-		
-		int[][] matrix = {
-				{1, 2, 3},
-				{4, 5, 6},
-				{7, 8, 9}
-		};
-		
+
+		int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+
 		int[][] transpose = rotatematrix(matrix);
-		
-		
-		for(int i = 0; i < transpose.length; i++) {
-			
-			for(int j = 0; j < transpose[0].length; j++) {
-				
+
+		for (int i = 0; i < transpose.length; i++) {
+
+			for (int j = 0; j < transpose[0].length; j++) {
 
 				System.out.print(transpose[i][j] + " ");
-				
+
 			}
-			
+
 			System.out.println();
 		}
 	}

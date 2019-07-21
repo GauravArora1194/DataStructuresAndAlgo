@@ -41,8 +41,11 @@ public class ReverseWordsInString {
 		
 		}
 		
+		System.out.println(String.join(" ", strArray));
+		
 		System.out.println(sb.toString());
 		
 		System.out.println((sb.toString()).trim());
+		
 	}
 }

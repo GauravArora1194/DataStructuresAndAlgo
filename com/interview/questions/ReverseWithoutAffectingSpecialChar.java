@@ -7,7 +7,7 @@ public class ReverseWithoutAffectingSpecialChar {
 	public static String reverseString(String str) {
 		
 		int start = 0;
-		int end = str.length()-1;
+		int end = str.length() - 1;
 		char[] chars = str.toCharArray();
 		//boolean s1 = false;
 		//boolean s2 = false;

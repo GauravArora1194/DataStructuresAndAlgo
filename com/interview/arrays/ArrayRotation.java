@@ -7,7 +7,7 @@ public class ArrayRotation {
 	// Auxiliary space -O(n)
 	public static int[] rotateByTempSpace(int[] arr, int rotAmt, int arrLen) {
 
-		//creates a temporary array
+		// creates a temporary array
 		int[] tempArr = new int[arrLen];
 		int j = 0;
 
@@ -50,29 +50,28 @@ public class ArrayRotation {
 	}
 
 	/*
-	 * Step1 - reverse array from index 0 to d-1. 
-	 * Step2 - reverse array from d to n.
+	 * Step1 - reverse array from index 0 to d-1. Step2 - reverse array from d to n.
 	 * Step3 - reverse whole array.
 	 * 
 	 * Complexity - O(n)
 	 */
 	public static int[] rotateByReversal(int[] arr, int d, int n) {
 
-		arrayReverse(arr,0,d-1);
-		arrayReverse(arr, d, n-1);
-		arrayReverse(arr, 0, n-1);
+		arrayReverse(arr, 0, d - 1);
+		arrayReverse(arr, d, n - 1);
+		arrayReverse(arr, 0, n - 1);
 
 		return arr;
 	}
 
 	public static void arrayReverse(int[] arr, int start, int end) {
 
-		int temp = 0;
-		for (int i = start; i < end; i++) {
+		while (start < end) {
 
-			temp = arr[i];
-			arr[i] = arr[end];
+			int temp = arr[start];
+			arr[start] = arr[end];
 			arr[end] = temp;
+			start++;
 			end--;
 
 		}
@@ -84,8 +83,8 @@ public class ArrayRotation {
 		int[] array = { 1, 2, 3, 4, 5, 6, 7 };
 
 		// int[] newArray = rotateByTempSpace(array, 6, array.length);
-		//int[] newArray = rotateByLeftShift(array, 6, array.length);
-		int[] newArray = rotateByReversal(array, 7, array.length);
+		// int[] newArray = rotateByLeftShift(array, 6, array.length);
+		int[] newArray = rotateByReversal(array, 2, array.length);
 		for (int i : newArray) {
 			System.out.print(i);
 		}
