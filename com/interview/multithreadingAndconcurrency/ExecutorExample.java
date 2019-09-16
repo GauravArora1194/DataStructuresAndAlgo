@@ -12,20 +12,20 @@ public class ExecutorExample {
 		Task t2 = new Task();
 		Task t3 = new Task();
 		
-		//ExecutorService executor = Executors.newFixedThreadPool(2);
+		ExecutorService executor = Executors.newFixedThreadPool(2);
 		// ExecutorService executor = Executors.newCachedThreadPool();
-		ExecutorService executor = Executors.newSingleThreadExecutor();
+		// ExecutorService executor = Executors.newSingleThreadExecutor();
 		
 		executor.submit(t1);
 		executor.submit(t2);
 		executor.submit(t3);
 		
-		System.out.println(executor.isTerminated());
+		// System.out.println(executor.isTerminated());
 		executor.shutdown();
 		
 		
-		System.out.println(executor.isTerminated());
-		System.out.println(executor.isShutdown());
+		// System.out.println(executor.isTerminated());
+		// System.out.println(executor.isShutdown());
 		
 	}
 	

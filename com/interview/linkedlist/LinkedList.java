@@ -15,141 +15,203 @@ public class LinkedList {
 
 	}
 
+	private class HeapMover {
+
+		Node node;
+	}
+
 	public void printList() {
 
 		Node n = head;
 
 		while (n != null) {
 			System.out.println(n.data + " ");
-			n=n.next;
+			n = n.next;
 		}
 
 	}
-	
+
 	public void pushAtFront(int data) {
-		
+
 		Node newNode = new Node(data);
-		
+
 		newNode.next = head;
 		head = newNode;
-		
+
 	}
-	
+
 	public void insertAfter(Node previousNode, int data) {
-		
-		if(previousNode == null) {
+
+		if (previousNode == null) {
 			return;
 		}
-		
+
 		Node newNode = new Node(data);
 		newNode.next = previousNode.next;
 		previousNode.next = newNode;
 	}
-	
+
 	public void append(int data) {
-		
-		if(head == null) {
+
+		if (head == null) {
 			head = new Node(data);
 			return;
 		}
-		
+
 		Node newNode = new Node(data);
-		
-		Node temp =head;
-		while(temp.next != null) {
+
+		Node temp = head;
+		while (temp.next != null) {
 			temp = temp.next;
 		}
 		temp.next = newNode;
 		return;
-		
+
 	}
-	
+
 	public int getCount() {
-		
+
 		Node temp = head;
-		
-		int count=0;
-		
-		while(temp != null) {
+
+		int count = 0;
+
+		while (temp != null) {
 			count++;
 			temp = temp.next;
 		}
-		
-		
+
 		return count;
 	}
-	
+
 	public void deleteKey(int key) {
-		
+
 		Node temp = head;
 		Node previous = null;
-		
-		//head is the node to be deleted(key present at head position)
-		if(temp != null && temp.data == key) {
+
+		// head is the node to be deleted(key present at head position)
+		if (temp != null && temp.data == key) {
 			head = temp.next;
 			return;
 		}
-		
-		while(temp != null && temp.data != key) {
+
+		while (temp != null && temp.data != key) {
 			previous = temp;
 			temp = temp.next;
 		}
-		
-		//if Key is not present in the list
-		if(temp == null) {
+
+		// if Key is not present in the list
+		if (temp == null) {
 			System.out.println("Key not present in the list!");
-			return ;
+			return;
 		}
-		
+
 		previous.next = temp.next;
-		
+
 	}
-	
+
 	public void deleteNodeAtPosition(int position) {
-		
-		if(head ==null) {
-			return ;
+
+		if (head == null) {
+			return;
 		}
-		
+
 		Node temp = head;
-		
-		//If first Node is to be deleted
-		if(position == 0) {
+
+		// If first Node is to be deleted
+		if (position == 0) {
 			head = temp.next;
 			return;
 		}
-		
-		for(int i = 0; i<position-1 && temp != null; i++) {
+
+		for (int i = 0; i < position - 1 && temp != null; i++) {
 			temp = temp.next;
 		}
-		
-		//Position is greater than list length
-		if(temp == null || temp.next == null) {
+
+		// Position is greater than list length
+		if (temp == null || temp.next == null) {
 			return;
 		}
-		
+
 		temp.next = temp.next.next;
 		return;
-		
-		
+
 	}
-	
+
 	public int detectLoop() {
-		
+
 		Node slowPtr = head;
 		Node fastPtr = head;
-		
-		while(slowPtr != null && fastPtr != null && fastPtr.next != null) {
-			
+
+		while (slowPtr != null && fastPtr != null && fastPtr.next != null) {
+
 			slowPtr = slowPtr.next;
 			fastPtr = fastPtr.next.next;
-			
-			if(slowPtr == fastPtr) {
+
+			if (slowPtr == fastPtr) {
 				System.out.println("Loop Found!");
 				return 1;
 			}
 		}
 		return 0;
+	}
+
+	public void displayReverse() {
+
+		displayReverseHelper(head);
+	}
+
+	private void displayReverseHelper(Node node) {
+
+		if (node == null) {
+			return;
+		}
+
+		displayReverseHelper(node.next);
+		System.out.print(node.data + " -> ");
+	}
+
+	public boolean isPalindrome() {
+
+		HeapMover left = new HeapMover();
+		left.node = head;
+
+		return isPalindromeHelper(left, head);
+	}
+
+	private boolean isPalindromeHelper(HeapMover left, Node right) {
+
+		if (null == right) {
+			return true;
+		}
+
+		boolean isPalindrome = isPalindromeHelper(left, right.next);
+
+		if (!isPalindrome) {
+			return false;
+		} else {
+
+			if (left.node.data == right.data) {
+				left.node = left.node.next;
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	}
+
+	public int midInList() {
+
+		Node slow = head;
+		Node fast = head;
+
+		while (fast != null && fast.next != null) {
+
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+
+		return slow.data;
 	}
 
 	public static void main(String[] args) {
@@ -163,25 +225,41 @@ public class LinkedList {
 		linkList.head.next = second;
 		second.next = third;
 
-//		System.out.println("First Node : " + linkList.head.data + " Next Pointer : " + linkList.head.next);
-//		System.out.println("Secong Node : " + second.data + " Next Pointer : " + second.next);
-//		System.out.println("Third Node : " + third.data + " Next Pointer : " + third.next);
+		// System.out.println("First Node : " + linkList.head.data + " Next Pointer : "
+		// + linkList.head.next);
+		// System.out.println("Secong Node : " + second.data + " Next Pointer : " +
+		// second.next);
+		// System.out.println("Third Node : " + third.data + " Next Pointer : " +
+		// third.next);
 
-//		linkList.printList();
-//		linkList.pushAtFront(0);
-//		linkList.printList();
-//		linkList.insertAfter(second, 10);
-//		linkList.printList();
-		
+		// linkList.printList();
+		// linkList.pushAtFront(0);
+		// linkList.printList();
+		// linkList.insertAfter(second, 10);
+		// linkList.printList();
+
 		linkList.append(4);
 		linkList.printList();
-		System.out.println("Total Elements in the List are : "+ linkList.getCount());
-		//linkList.deleteKey(10);
+		System.out.println("-----------Display Reverse Start----------------");
+		linkList.displayReverse();
+		System.out.println();
+		System.out.println("-----------Display Reverse End----------------");
+		System.out.println("Total Elements in the List are : " + linkList.getCount());
+		// linkList.deleteKey(10);
 		linkList.deleteNodeAtPosition(3);
 		linkList.printList();
-		
-		System.out.println("Total Elements in the List are : "+ linkList.getCount());
-		
+
+		System.out.println("Total Elements in the List are : " + linkList.getCount());
+
+		linkList.append(2);
+		linkList.append(1);
+		// linkList.append(2);
+
+		linkList.printList();
+
+		System.out.println("Is Palindrome : " + linkList.isPalindrome());
+
+		System.out.println("Middle Element is : " + linkList.midInList());
 	}
 
 }

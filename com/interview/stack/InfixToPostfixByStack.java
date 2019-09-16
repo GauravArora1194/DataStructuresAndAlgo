@@ -3,15 +3,9 @@ package com.interview.stack;
 import java.util.Stack;
 
 public class InfixToPostfixByStack {
-	
-	
-	
-	
-	
 
 	// higher returned value means higher precedence order
-	public  static int precedenceOrder(char operator) {
-		
+	public static int precedenceOrder(char operator) {
 
 		switch (operator) {
 
@@ -44,39 +38,38 @@ public class InfixToPostfixByStack {
 				result = result + c;
 			} else if (c == '(') {
 				stack.push(c);
-			}else if(c == ')') {
-				
-				while(stack.peek() != '(' && !stack.empty()) {
+			} else if (c == ')') {
+
+				while (stack.peek() != '(' && !stack.empty()) {
 					result = result + stack.pop();
 				}
-				
-				if(stack.empty()) {
+
+				if (stack.empty()) {
 					return "Invalid Expression!";
-				}else {
+				} else {
 					stack.pop();
 				}
-			}else {
-				
-				while(!stack.empty() && precedenceOrder(c) <= precedenceOrder(stack.peek()) ) {
+			} else {
+
+				while (!stack.empty() && precedenceOrder(c) <= precedenceOrder(stack.peek())) {
 					result = result + stack.pop();
 				}
 				stack.push(c);
 			}
 
 		}
-		
-		while(!stack.empty()) {
+
+		while (!stack.empty()) {
 			result = result + stack.pop();
 		}
-		
-		
+
 		return result;
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		String exp = "a+b*(c^d-e)^(f+g*h)-i";
 		System.out.println(infixToPostfix(exp));
-		
+
 	}
 }
