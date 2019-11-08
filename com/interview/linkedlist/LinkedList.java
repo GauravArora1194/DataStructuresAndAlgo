@@ -155,6 +155,54 @@ public class LinkedList {
 		return 0;
 	}
 
+	public void removeLoop(Node loop, Node head) {
+
+		// Here loop is the Node of the loop (slow pointer node) and head is the head
+		// node.
+
+		Node ptr1 = loop;
+		Node ptr2 = loop;
+
+		// Step 1 : Count the number of nodes in the loop.
+
+		int count = 1;
+
+		while (ptr2.next != ptr1) {
+
+			count++;
+			ptr2 = ptr2.next;
+		}
+
+		// Step 2 : Initialize two pointers, one at head and other at count position
+		// ahead.
+
+		ptr1 = head;
+		ptr2 = head;
+
+		for (int i = 0; i < count; i++) {
+
+			ptr2 = ptr2.next;
+		}
+
+		// Step 3 : Move the pointers until they meet at the starting of the loop.
+
+		while (ptr2 != ptr1) {
+
+			ptr1 = ptr1.next;
+			ptr2 = ptr2.next;
+		}
+
+		// Step 4 : Find last node of loop and set it's next to NULL.
+
+		while (ptr2.next != ptr1) {
+
+			ptr2 = ptr2.next;
+		}
+
+		ptr2.next = null;
+
+	}
+
 	public void displayReverse() {
 
 		displayReverseHelper(head);
@@ -200,6 +248,99 @@ public class LinkedList {
 
 	}
 
+	public boolean isPalindrome(Node head) {
+
+		// Step 1 : Get the middle Node in the list.
+
+		Node slow = head;
+		Node fast = head;
+		Node prevOfMidNode = null;
+
+		while (fast != null && fast.next != null) {
+
+			fast = fast.next.next;
+			prevOfMidNode = slow;
+			slow = slow.next;
+		}
+
+		Node midNode = slow;
+
+		// If there are odd number of nodes then discard the middle node for comparison.
+		Node temp = null;
+
+		if (fast != null) {
+
+			temp = midNode;
+			midNode = midNode.next;
+
+		}
+
+		// Step 2 : Two list are obtained in head1 and head2.
+		Node head1 = head;
+		Node head2 = midNode;
+		prevOfMidNode.next = null;
+
+		// Step 3 : Reverse second list.
+
+		head2 = reverse(head2);
+
+		// Step 4 : Compare the list for equality.
+
+		boolean res = compareList(head1, head2);
+
+		// Step 5 : Reconstruct the original list
+
+		head2 = reverse(head2);
+
+		if (temp != null) {
+
+			prevOfMidNode.next = temp;
+			temp.next = head2;
+		} else {
+			prevOfMidNode.next = head2;
+		}
+
+		return res;
+
+	}
+
+	public boolean compareList(Node node1, Node node2) {
+
+		while (node1 != null && node2 != null) {
+
+			if (node1.data == node2.data) {
+				node1 = node1.next;
+				node2 = node2.next;
+			} else {
+				return false;
+			}
+		}
+
+		if (node1 == null && node2 == null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public Node reverse(Node node) {
+
+		Node current = node;
+		Node prev = null;
+		Node next;
+
+		while (current != null) {
+
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+
+		return prev;
+
+	}
+
 	public int midInList() {
 
 		Node slow = head;
@@ -212,6 +353,20 @@ public class LinkedList {
 		}
 
 		return slow.data;
+	}
+
+	public Node middleNode(Node head) {
+
+		Node slow = head;
+		Node fast = head;
+
+		while (fast != null && fast.next != null) {
+
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		return slow.next;
 	}
 
 	public static void main(String[] args) {
@@ -258,6 +413,8 @@ public class LinkedList {
 		linkList.printList();
 
 		System.out.println("Is Palindrome : " + linkList.isPalindrome());
+		
+		System.out.println("Is Palindrome : " + linkList.isPalindrome(linkList.head));
 
 		System.out.println("Middle Element is : " + linkList.midInList());
 	}
