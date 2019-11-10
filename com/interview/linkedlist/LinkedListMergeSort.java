@@ -1,5 +1,8 @@
 package com.interview.linkedlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedListMergeSort {
 
 	Node head;
@@ -115,6 +118,32 @@ public class LinkedListMergeSort {
 		merged = merged.next;
 
 		return merged;
+
+	}
+
+	// Assumes the list is unsorted.
+	public void removeDuplicates() {
+
+		Set<Integer> set = new HashSet<>();
+
+		Node current = head;
+		Node prev = null;
+
+		while (current != null) {
+
+			int currVal = current.data;
+
+			if (set.contains(currVal)) {
+				prev.next = current.next;
+
+			} else {
+
+				set.add(currVal);
+				prev = current;
+			}
+
+			current = current.next;
+		}
 
 	}
 

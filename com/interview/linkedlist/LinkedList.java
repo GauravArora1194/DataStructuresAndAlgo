@@ -83,6 +83,15 @@ public class LinkedList {
 		return count;
 	}
 
+	public int getCount(Node node) {
+
+		if (node == null) {
+			return 0;
+		}
+
+		return 1 + getCount(node.next);
+	}
+
 	public void deleteKey(int key) {
 
 		Node temp = head;
@@ -369,6 +378,56 @@ public class LinkedList {
 		return slow.next;
 	}
 
+	public void deleteAlternateNodes() {
+
+		if (head == null || head.next == null) {
+			return;
+		}
+
+		Node prev = head;
+		Node next = head.next;
+
+		while (prev != null && next != null) {
+
+			prev.next = next.next;
+			prev = prev.next;
+
+			if (prev != null) {
+
+				next = prev.next;
+			}
+
+		}
+	}
+
+	public void segregate0s1s2s() {
+
+		int count[] = new int[3];
+
+		Node temp = head;
+
+		while (temp != null) {
+
+			count[temp.data]++;
+			temp = temp.next;
+		}
+
+		temp = head;
+		int i = 0;
+
+		while (temp != null) {
+
+			if (count[i] == 0) {
+				i++;
+			} else {
+
+				temp.data = i;
+				count[i]--;
+				temp = temp.next;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 
 		LinkedList linkList = new LinkedList();
@@ -413,10 +472,16 @@ public class LinkedList {
 		linkList.printList();
 
 		System.out.println("Is Palindrome : " + linkList.isPalindrome());
-		
+
 		System.out.println("Is Palindrome : " + linkList.isPalindrome(linkList.head));
 
 		System.out.println("Middle Element is : " + linkList.midInList());
+
+		linkList.deleteNodeAtPosition(4);
+
+		linkList.deleteAlternateNodes();
+
+		linkList.printList();
 	}
 
 }
