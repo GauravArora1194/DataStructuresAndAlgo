@@ -1,6 +1,10 @@
 package com.interview.design.patterns.factory;
 
 public class Blog extends Website {
+	
+	public Blog() {
+		super();
+	}
 
 	@Override
 	public void createWebsite() {

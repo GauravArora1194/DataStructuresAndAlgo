@@ -1,7 +1,9 @@
 package com.interview.hashing;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 
 public class HashMapDemo {
@@ -10,15 +12,17 @@ public class HashMapDemo {
 	public static void main(String[] args) {
 		
 		// with hashmap size remains same even after garbage collection.
-		//Map<Order, Integer> map = new HashMap<>();
+		Map<Order, Integer> hashmap = new HashMap<>();
 		
 		// with this size changes to 0 after garbage collection
 		Map<Order, Integer> map = new WeakHashMap<>();
 		
 		map.put(new Order(3, "order3"), 100);
 		map.put(new Order(4, "order4"), 200);
+		hashmap.put(new Order(5,"order5"), 300);
 		
 		System.out.println(map.size());
+		System.out.println(hashmap.size());
 		
 		System.gc();
 		
@@ -29,7 +33,11 @@ public class HashMapDemo {
 		}
 		
 		System.out.println(map.size());
+		System.out.println(hashmap.size());
+		Set<Integer> set = new HashSet<>();
+		
 	}
+	
 }
 
 

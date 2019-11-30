@@ -34,7 +34,7 @@ public class SubSequencesInString {
 	public static void main(String[] args) {
 		
 		
-		String str = "ab";
+		String str = "abc";
 		System.out.println(getSubSequence(str));
 	}
 }

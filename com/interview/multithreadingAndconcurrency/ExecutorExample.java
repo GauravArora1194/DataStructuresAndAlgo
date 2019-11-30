@@ -13,8 +13,8 @@ public class ExecutorExample {
 		Task t3 = new Task();
 		
 		ExecutorService executor = Executors.newFixedThreadPool(2);
-		// ExecutorService executor = Executors.newCachedThreadPool();
-		// ExecutorService executor = Executors.newSingleThreadExecutor();
+		ExecutorService executor1 = Executors.newCachedThreadPool();
+		ExecutorService executor2 = Executors.newSingleThreadExecutor();
 		
 		executor.submit(t1);
 		executor.submit(t2);

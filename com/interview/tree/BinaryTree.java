@@ -511,7 +511,6 @@ public class BinaryTree {
 			return false;
 	}
 
-	
 	// convert binary tree to its mirror image
 	public Node mirror(Node root) {
 
@@ -546,6 +545,45 @@ public class BinaryTree {
 		}
 
 		return false;
+	}
+
+	public int getDiameter(Node root) {
+
+		if (root == null)
+			return 0;
+
+		int leftHeight = treeMaxHeight(root.left);
+		int rightHeight = treeMaxHeight(root.right);
+
+		int leftDiameter = getDiameter(root.left);
+		int rightDiameter = getDiameter(root.right);
+
+		return Math.max(leftHeight + rightHeight + 1, Math.max(leftDiameter, rightDiameter));
+	}
+
+	public void printAllRootToLeafPath(Node root) {
+
+		Stack<Integer> stack = new Stack<>();
+		printAllRootToLeafPathUtil(root, stack);
+	}
+
+	private void printAllRootToLeafPathUtil(Node root, Stack<Integer> stack) {
+
+		if (root == null)
+			return;
+
+		stack.push(root.data);
+
+		if (root.left == null && root.right == null) {
+
+			System.out.println(stack);
+		}
+
+		printAllRootToLeafPathUtil(root.left, stack);
+		printAllRootToLeafPathUtil(root.right, stack);
+
+		stack.pop();
+
 	}
 
 	public static void main(String[] args) {

@@ -135,7 +135,7 @@ public class AddTwoNumbersUsingRecursion {
 
 			int diff = Math.abs(size1 - size2);
 
-			// Move diff number of node is first list
+			// Move diff number of node in first list
 
 			Node temp = head1;
 
