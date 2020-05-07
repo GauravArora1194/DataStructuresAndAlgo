@@ -6,7 +6,7 @@ public class KthSmallestElement {
 
 		int size = arr.length;
 
-		// Build the max heap from array
+		// Build the min heap from array
 		for (int i = size / 2 - 1; i >= 0; i--) {
 			heapify(arr, i, size);
 		}

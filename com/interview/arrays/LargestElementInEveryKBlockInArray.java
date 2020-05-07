@@ -7,8 +7,8 @@ public class LargestElementInEveryKBlockInArray {
 	
 	
 	
-	// A Dequeue (Double ended queue) based method for printing maixmum element of
-    // all subarrays of size k
+	// A Dequeue (Double ended queue) based method for printing maximum element of
+    // all sub-arrays of size k
     static void printMax(int arr[],int n, int k)
     {
         // Create a Double Ended Queue, Qi that will store indexes of array elements

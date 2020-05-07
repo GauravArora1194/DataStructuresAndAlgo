@@ -15,6 +15,7 @@ public class LargestRectangularAreaInHistogram {
 		
 		 // Run through all bars of given histogram
         int i = 0;
+        
         while (i < arr.length)
         {
             // If this bar is higher than the bar on top stack, push it to stack
