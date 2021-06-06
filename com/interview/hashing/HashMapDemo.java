@@ -34,7 +34,10 @@ public class HashMapDemo {
 		
 		System.out.println(map.size());
 		System.out.println(hashmap.size());
-		Set<Integer> set = new HashSet<>();
+		
+		Map<String, String> stringMap = new HashMap<>();
+		
+		stringMap.put("Name", "Gaurav");
 		
 	}
 	

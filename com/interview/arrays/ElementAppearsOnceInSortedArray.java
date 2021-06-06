@@ -57,6 +57,14 @@ public class ElementAppearsOnceInSortedArray {
 		System.out.println("Unique element is : " + findElement(arr2));
 		System.out.println("Unique element is : " + findElement(arr3));
 		System.out.println("Unique element is : " + findElement(arr4));
+		
+		int xor = arr[0];
+		for(int i = 1; i < arr.length; i++) {
+		
+			xor = xor ^ arr[i];
+		}
+		
+		System.out.println("XOR operation give " + xor);
 	}
 
 }

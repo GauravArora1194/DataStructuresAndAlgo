@@ -1,5 +1,8 @@
 package com.interview.hashing;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomHashMap<K, V> {
 
 	private Node<K, V>[] bucket;
@@ -103,13 +106,18 @@ public class CustomHashMap<K, V> {
 
 	public static void main(String[] args) {
 
-		CustomHashMap<String, Integer> map = new CustomHashMap<>();
+		//CustomHashMap<String, Integer> map = new CustomHashMap<>();
+		Map<String, String> map = new HashMap<>();
+		map.put("name", "gaurav");
+		map.put("ksad", "afgs");
+		
+		System.out.println(map.toString());
 		
 		System.out.println(map.isEmpty());
 
-		map.put("one", 1);
-		map.put("two", 2);
-		map.put("three", 3);
+		//map.put("one", 1);
+		//map.put("two", 2);
+		//map.put("three", 3);
 
 		System.out.println(map.size());
 

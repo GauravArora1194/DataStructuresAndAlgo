@@ -68,9 +68,13 @@ public class ArrayRotation {
 
 		while (start < end) {
 
-			int temp = arr[start];
-			arr[start] = arr[end];
-			arr[end] = temp;
+			//int temp = arr[start];
+			//arr[start] = arr[end];
+			//arr[end] = temp;
+			
+			arr[start] = arr[start] + arr[end];
+			arr[end] = arr[start] - arr[end];
+			arr[start] = arr[start] - arr[end];
 			start++;
 			end--;
 

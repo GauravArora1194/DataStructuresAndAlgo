@@ -59,18 +59,87 @@ public class NextGreaterElement {
 		}
 	}
 
+	public static int[] NGEUsingStack1(int[] arr) {
+
+		int[] nge = new int[arr.length];
+		Stack<Integer> stack = new Stack<>();
+
+		nge[arr.length - 1] = -1;
+		stack.push(arr[arr.length - 1]);
+
+		for (int i = arr.length - 2; i >= 0; i--) {
+
+			while (!stack.isEmpty() && arr[i] >= stack.peek()) {
+
+				stack.pop();
+			}
+
+			if (stack.isEmpty()) {
+				nge[i] = -1;
+
+			} else {
+				nge[i] = stack.peek();
+			}
+
+			stack.push(arr[i]);
+		}
+
+		return nge;
+
+	}
+
+	public static int[] NGEUsingStack2(int[] arr) {
+
+		int[] nge = new int[arr.length];
+		Stack<Integer> stack = new Stack<>();
+
+		stack.push(0);
+
+		for (int i = 1; i < arr.length; i++) {
+
+			while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+
+				int index = stack.pop();
+				nge[index] = arr[i];
+
+			}
+
+			stack.push(i);
+
+		}
+
+		while (!stack.isEmpty()) {
+
+			int index = stack.pop();
+			nge[index] = -1;
+
+		}
+
+		return nge;
+
+	}
+
 	public static void main(String[] args) {
 
 		int[] arr = { 11, 13, 21, 3, 25 };
 
 		int[] result = nextGreaterElement(arr);
 
-		for (int i : result)
-			System.out.print(i + " ");
+		display(result);
 
 		// using stack approach
 		System.out.println("\nUsing stack approach : ");
 		NGEUsingStack(arr);
+
+		int[] result1 = NGEUsingStack1(arr);
+		System.out.println();
+		display(result1);
+		System.out.println();
+
+		int[] result2 = NGEUsingStack1(arr);
+		System.out.println();
+		display(result2);
+		System.out.println();
 
 		Integer i1 = 127;
 		Integer i2 = 127;
@@ -81,5 +150,10 @@ public class NextGreaterElement {
 		Integer i4 = 128;
 
 		System.out.println(i3 == i4);
+	}
+
+	private static void display(int[] result) {
+		for (int i : result)
+			System.out.print(i + " ");
 	}
 }
