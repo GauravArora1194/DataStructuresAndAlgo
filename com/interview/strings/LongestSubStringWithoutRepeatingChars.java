@@ -1,5 +1,6 @@
 package com.interview.strings;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,6 +121,56 @@ public class LongestSubStringWithoutRepeatingChars {
 		return false;
 	}
 
+	public static int longestSubString(String str) {
+
+		int i = -1;
+		int j = -1;
+		int maxLength = 0;
+
+		Map<Character, Integer> map = new HashMap<>();
+
+		while (true) {
+
+			boolean f1 = false;
+			boolean f2 = false;
+
+			while (i < str.length() - 1) {
+
+				f1 = true;
+				i++;
+				char c = str.charAt(i);
+				map.put(c, map.getOrDefault(c, 0) + 1);
+
+				if (map.get(c) == 2) {
+					break;
+				} else {
+					int len = i - j;
+					maxLength = Math.max(maxLength, len);
+
+				}
+
+			}
+
+			while (j < i) {
+
+				f2 = true;
+				j++;
+				char c = str.charAt(j);
+				map.put(c, map.get(c) - 1);
+
+				if (map.get(c) == 1) {
+					break;
+				}
+			}
+
+			if (f1 == false && f2 == false) {
+				break;
+			}
+		}
+
+		return maxLength;
+	}
+
 	public static void main(String[] args) {
 
 		String str = "geeksforgeeks";
@@ -129,6 +180,8 @@ public class LongestSubStringWithoutRepeatingChars {
 		System.out.println("The length of " + "the longest non repeating character is " + len);
 
 		System.out.println("The length of " + "the longest non repeating character using hashmap is " + len1);
+
+		System.out.println(longestSubString(str));
 
 		System.out.println(Integer.valueOf("-123"));
 		System.out.println(Integer.parseInt("-123"));

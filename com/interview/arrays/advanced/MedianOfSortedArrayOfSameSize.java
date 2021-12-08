@@ -4,17 +4,19 @@ public class MedianOfSortedArrayOfSameSize {
 
 	public static void main(String[] args) {
 
-		// int[] arr1 = { 1, 12, 15, 26, 38 };
-		// int[] arr2 = { 2, 13, 17, 30, 45 };
+		int[] arr1 = { 1, 12, 15, 26, 38 };
+		int[] arr2 = { 2, 13, 17, 30, 45 };
 
-		int[] arr1 = { 1, 2, 3, 4, 5 };
-		int[] arr2 = { 7, 8, 9, 10, 11 };
+		// int[] arr1 = { 1, 2, 3, 4, 5 };
+		// int[] arr2 = { 7, 8, 9, 10, 11 };
 
 		int median = findMedian(arr1, arr2, 0, arr1.length - 1, 0, arr2.length - 1); // complexity - O(log n)
 		int median1 = findMedianLinear(arr1, arr2, arr1.length); // complexity - O(n)
+		double median2 = medianOf2ArrayOfSameSize(arr1, arr2);
 
 		System.out.println("Median  is : " + median);
 		System.out.println("Median  using linear approach is : " + median1);
+		System.out.println("Median  : " + median2);
 
 	}
 
@@ -108,6 +110,45 @@ public class MedianOfSortedArrayOfSameSize {
 
 		return (m1 + m2) / 2;
 
+	}
+
+	// complexity- O(logn)
+	public static double medianOf2ArrayOfSameSize(int[] arr1, int[] arr2) {
+
+		double median = 0.0;
+
+		int arr1Low = 0;
+		int arr1High = arr1.length - 1;
+
+		int arr2Low = 0;
+		int arr2High = arr2.length - 1;
+
+		while (arr1Low <= arr1High && arr2Low <= arr2High) {
+
+			int mid1 = (arr1Low + arr1High) / 2;
+			int mid2 = (arr2Low + arr2High) / 2;
+
+			if (arr1High - arr1Low == 1 && arr2High - arr2Low == 1) {
+
+				median = (Math.max(arr1[arr1Low], arr2[arr2Low]) + Math.min(arr1[arr1High], arr2[arr2High])) / 2.0;
+				break;
+			}
+
+			if (arr1[mid1] == arr2[mid2]) {
+				median = arr1[mid1];
+				break;
+			} else if (arr1[mid1] > arr2[mid2]) {
+
+				arr2Low = mid2;
+				arr1High = mid1;
+			} else {
+
+				arr2High = mid2;
+				arr1Low = mid1;
+			}
+		}
+
+		return median;
 	}
 
 }

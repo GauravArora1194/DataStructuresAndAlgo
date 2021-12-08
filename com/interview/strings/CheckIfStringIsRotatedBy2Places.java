@@ -47,5 +47,8 @@ public class CheckIfStringIsRotatedBy2Places {
 		System.out.println("Is String 2 is rotated by 2 places : " + checkIfRotated(str1, str2));
 		System.out.println("Is String 2 is rotated by 2 places : " + checkIfRotated(str3, str4));
 		System.out.println("Is String 2 is rotated by 2 places : " + checkIfRotated(str5, str6));
+		
+		System.out.println(Long.valueOf("0000000001"));
+		System.out.println(Long.valueOf("1"));
 	}
 }

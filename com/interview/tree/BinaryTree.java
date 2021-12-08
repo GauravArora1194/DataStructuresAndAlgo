@@ -28,6 +28,12 @@ public class BinaryTree {
 
 	}
 
+	static class DiaPair {
+
+		int ht;
+		int dia;
+	}
+
 	public void preOrderTraversal(Node node) {
 
 		if (node == null) {
@@ -558,7 +564,26 @@ public class BinaryTree {
 		int leftDiameter = getDiameter(root.left);
 		int rightDiameter = getDiameter(root.right);
 
-		return Math.max(leftHeight + rightHeight + 1, Math.max(leftDiameter, rightDiameter));
+		return Math.max(leftHeight + rightHeight + 2, Math.max(leftDiameter, rightDiameter));
+	}
+
+	public DiaPair getDiameter2(Node root) {
+
+		if (root == null) {
+
+			DiaPair base = new DiaPair();
+			base.ht = 0;
+			base.dia = 0;
+		}
+
+		DiaPair leftPair = getDiameter2(root.left);
+		DiaPair rightPair = getDiameter2(root.right);
+
+		DiaPair myPair = new DiaPair();
+		myPair.ht = Math.max(leftPair.ht, rightPair.ht) + 1;
+		myPair.dia = Math.max(leftPair.ht + rightPair.ht + 2, Math.max(leftPair.dia, rightPair.dia));
+
+		return myPair;
 	}
 
 	public void printAllRootToLeafPath(Node root) {

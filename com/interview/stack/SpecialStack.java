@@ -22,6 +22,10 @@ public class SpecialStack extends Stack<Integer> {
 		System.out.println(s.getMin());
 		s.push(5);
 		System.out.println(s.getMin());
+		System.out.println(Integer.MIN_VALUE);
+		System.out.println(Integer.MAX_VALUE);
+		System.out.println((long)(Integer.MIN_VALUE + Integer.MIN_VALUE) - Integer.MAX_VALUE);
+		System.out.println(Long.MAX_VALUE);
 
 	}
 

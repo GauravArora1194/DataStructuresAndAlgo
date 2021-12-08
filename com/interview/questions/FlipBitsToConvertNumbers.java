@@ -26,6 +26,9 @@ public class FlipBitsToConvertNumbers {
 		b=a^b;
 		a=a^b;
 		System.out.println(a + " " + b);
+		
+		String str = "abc";
+		System.out.println(str.substring(1,1));
 	}
 	
 	

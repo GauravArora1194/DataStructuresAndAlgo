@@ -32,12 +32,48 @@ public class MajorityElementInAnArray {
 
 		return majorityElement;
 	}
+	
+	public static int getMajorityElementSpaceOptimized(int[] arr) {
+		// potential candidate
+		int value = arr[0];
+		int count = 1;
+		
+		for(int i = 1; i < arr.length; i++) {
+			
+			if(value == arr[i]) {
+				count++;
+			} else {
+				count--;
+			}
+			
+			if(count == 0) {
+				value = arr[i];
+				count = 1;
+			}
+		}
+		
+		int valCount = 0;
+		
+		for(int  i = 0; i < arr.length; i++) {
+			
+			if(arr[i] == value) {
+				valCount++;
+			}
+		}
+		
+		if(valCount > arr.length / 2) {
+			return value;
+		} else {
+			return -1;
+		}
+		
+	}
 
 	public static void main(String[] args) {
 
 		int[] arr = { 3, 1, 3, 3, 2 };
 
-		int majorityElement = getMajorityElement(arr);
+		int majorityElement = getMajorityElementSpaceOptimized(arr);
 
 		if (majorityElement == -1) {
 
@@ -49,7 +85,7 @@ public class MajorityElementInAnArray {
 
 		int[] arr1 = { 1, 2, 3 };
 
-		int majorityElement1 = getMajorityElement(arr1);
+		int majorityElement1 = getMajorityElementSpaceOptimized(arr1);
 
 		if (majorityElement1 == -1) {
 

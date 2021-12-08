@@ -16,6 +16,8 @@ public class LunchOrderDemo {
 		System.out.println(order.getCondiments());
 		System.out.println(order.getDressing());
 		System.out.println(order.getMeat());
+		
+		StringBuilder sb = new StringBuilder();
 
 	}
 
