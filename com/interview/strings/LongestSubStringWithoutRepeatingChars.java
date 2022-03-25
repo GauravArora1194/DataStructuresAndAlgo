@@ -181,7 +181,7 @@ public class LongestSubStringWithoutRepeatingChars {
 
 		System.out.println("The length of " + "the longest non repeating character using hashmap is " + len1);
 
-		System.out.println(longestSubString(str));
+		System.out.println(longestSubString("ggububgvfk"));
 
 		System.out.println(Integer.valueOf("-123"));
 		System.out.println(Integer.parseInt("-123"));

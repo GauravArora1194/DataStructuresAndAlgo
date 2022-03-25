@@ -14,7 +14,7 @@ public class BinarySearchInSortedAndRotatedArray {
 		int end = arr.length - 1;
 		int mid = (beg + end) / 2;
 
-		while (beg <= end) {
+		while (beg <= end && mid != arr.length - 1) {
 
 			if (arr[mid] > arr[mid + 1])
 				return mid;
