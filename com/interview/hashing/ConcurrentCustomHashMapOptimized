@@ -1,0 +1,115 @@
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class ConcurrentCustomHashMap<K, V> {
+
+    static class Node<K, V> {
+        final int hashCode;
+        final K key;
+        volatile V value;
+        Node<K, V> next;
+
+        Node(int hashCode, K key, V value, Node<K, V> next) {
+            this.hashCode = hashCode;
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    private final Node<K, V>[] bucket;
+    private final ReentrantLock[] locks;
+    private final AtomicInteger size = new AtomicInteger(0);
+    private static final int MAX_CAPACITY = 1 << 4;
+
+    ConcurrentCustomHashMap() {
+        this(MAX_CAPACITY);
+    }
+
+    @SuppressWarnings("unchecked")
+    ConcurrentCustomHashMap(int maxCapacity) {
+        this.bucket = new Node[maxCapacity];
+        this.locks = new ReentrantLock[maxCapacity];
+        for (int i = 0; i < maxCapacity; i++) {
+            locks[i] = new ReentrantLock();
+        }
+    }
+
+    public void put(K key, V value) {
+        int hash = spread(hash(key));
+        int index = hash & (bucket.length - 1);
+        locks[index].lock();
+
+        try {
+            Node<K, V> head = bucket[index];
+            Node<K, V> curr = head;
+
+            while (curr != null) {
+                if (curr.hashCode == hash && curr.key.equals(key)) {
+                    curr.value = value;
+                    return;
+                }
+                curr = curr.next;
+            }
+
+            bucket[index] = new Node<>(hash, key, value, head);
+            size.incrementAndGet();
+
+        } finally {
+            locks[index].unlock();
+        }
+    }
+
+    public V get(K key) {
+        int hash = spread(hash(key));
+        int index = hash & (bucket.length - 1);
+
+        Node<K, V> curr = bucket[index];
+        while (curr != null) {
+            if (curr.hashCode == hash && curr.key.equals(key)) {
+                return curr.value;
+            }
+            curr = curr.next;
+        }
+        return null;
+    }
+
+    public void remove(K key) {
+        int hash = spread(hash(key));
+        int index = hash & (bucket.length - 1);
+        locks[index].lock();
+
+        try {
+            Node<K, V> curr = bucket[index];
+            Node<K, V> prev = null;
+
+            while (curr != null) {
+                if (curr.hashCode == hash && curr.key.equals(key)) {
+                    if (prev == null) {
+                        bucket[index] = curr.next;
+                    } else {
+                        prev.next = curr.next;
+                    }
+                    size.decrementAndGet();
+                    return;
+                }
+                prev = curr;
+                curr = curr.next;
+            }
+        } finally {
+            locks[index].unlock();
+        }
+    }
+
+    public int size() {
+        return size.get();
+    }
+
+    private int hash(K key) {
+        return (key != null) ? key.hashCode() : 0;
+    }
+
+    private int spread(int h) {
+        return h ^ (h >>> 16);
+    }
+}
